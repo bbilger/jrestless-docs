@@ -1,0 +1,11 @@
+version: 0.1
+
+phases:
+  build:
+    commands:
+      - ./gradlew asciidoctor
+artifacts:
+  files:
+    - index.html
+    - images/**/*.png
+  base-directory: build/asciidoc/html5

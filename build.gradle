@@ -1,0 +1,28 @@
+plugins {
+	id 'org.asciidoctor.convert' version '1.5.3'
+	id 'com.github.jruby-gradle.base' version '1.2.1'
+}
+
+
+apply plugin: 'org.asciidoctor.convert'
+
+dependencies {
+	gems 'rubygems:asciidoctor-diagram:1.4.0'
+}
+
+asciidoctorj {
+	version = '1.5.4'
+}
+
+asciidoctor {
+	dependsOn jrubyPrepare
+	requires = ['asciidoctor-diagram']
+	gemPath = jrubyPrepare.outputDir
+	attributes \
+		'imagesdir': 'images',
+		'toc': 'left'
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.4.1'
+}
