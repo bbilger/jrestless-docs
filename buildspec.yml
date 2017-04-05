@@ -5,4 +5,6 @@ phases:
     commands:
       - ./gradlew docdist
 artifacts:
-  base-directory: build/dist/*/
+  files:
+    - '**/*'
+  base-directory: 'build/dist/*/'
