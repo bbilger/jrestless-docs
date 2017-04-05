@@ -1,8 +1,10 @@
+
 plugins {
 	id 'org.asciidoctor.convert' version '1.5.3'
 	id 'com.github.jruby-gradle.base' version '1.2.1'
 }
 
+def codeBuildVersion = System.getenv('CODEBUILD_SOURCE_VERSION') ? System.getenv('CODEBUILD_SOURCE_VERSION') : 'master'
 
 apply plugin: 'org.asciidoctor.convert'
 
@@ -22,6 +24,14 @@ asciidoctor {
 		'imagesdir': 'images',
 		'toc': 'left'
 }
+
+task docdist(type: Copy) {
+    from('build/asciidoc/html5')
+    into("build/dist/$codeBuildVersion")
+    include('index.html', 'images/**/*.png')
+}
+
+docdist.dependsOn asciidoctor
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '3.4.1'

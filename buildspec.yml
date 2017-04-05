@@ -3,9 +3,6 @@ version: 0.1
 phases:
   build:
     commands:
-      - ./gradlew asciidoctor
+      - ./gradlew docdist
 artifacts:
-  files:
-    - index.html
-    - images/**/*.png
-  base-directory: build/asciidoc/html5
+  base-directory: build/dist/*/
